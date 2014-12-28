@@ -48,8 +48,11 @@ public class BlockWaterTank extends BlockContainer{
     public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float f, int i) {
         if(!world.isRemote) {
             ItemStack drop = new ItemStack(com.InfinityRaider.AgriCraft.init.Blocks.blockWaterTank, 1);
-            drop.setTagCompound(((TileEntityCustomWood) world.getTileEntity(x, y, z)).getMaterialTag());
-            this.dropBlockAsItem(world, x, y, z, drop);
+            TileEntityCustomWood tile = ((TileEntityCustomWood) world.getTileEntity(x, y, z));
+            if(tile!=null){
+            	drop.setTagCompound(tile.getMaterialTag());
+            	this.dropBlockAsItem(world, x, y, z, drop);
+            }
         }
     }
 
